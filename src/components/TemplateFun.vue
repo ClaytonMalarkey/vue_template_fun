@@ -1,12 +1,16 @@
 <template>
     <div>
         <button @click=toggle_TF>CLICK ME</button>
-        <div v-if="is_true == true" class="TemplateFun">
         
-            <h1>{{ blog_title }}</h1>
-            <p>{{ blog_content }}</p>
-            <img :src="require(`@/assets/${blog_img_ulr}`)" > 
+        <div v-if="is_true == true" class="TemplateFun">
+            <article v-for="(post, index) in posts" :key="index">
+                <p>{{ post[`blog_title`] }}</p>
+                <p>{{ post[`blog_content`] }}</p>
+                <img :src="require(`@/assets/${post.blog_img_ulr}`)" >
+            </article>
+            <!-- <img :src="require(`@/assets/${post.blog_img_ulr}`)" >  -->
         </div>
+    
     </div>
     
     
@@ -16,10 +20,27 @@
   export default {
         data(){
             return {
-                blog_content:"test content",
-                blog_title: "blog",
-                blog_img_ulr: "logo.png",
-                is_true : false
+                posts:[
+                {
+                    blog_content:"test content",
+                    blog_title: "blog",
+                    blog_img_ulr: "logo.png",
+                },
+                {
+                    blog_content:"more test content",
+                    blog_title:"another test",
+                    blog_img_ulr:"logo.png",
+                },
+                {
+                    blog_content:"yet more test content",
+                    blog_title:"yet another test",
+                    blog_img_ulr:"logo.png",
+                
+                }
+                ],
+                is_true:false
+                
+                
             }
         },
         methods:{
